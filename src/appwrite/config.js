@@ -3,8 +3,8 @@ import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
   client = new Client();
-  databases;
-  bucket;
+  databases;// to store posts , texts etc .
+  bucket;// to store , file , images etc 
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
@@ -67,7 +67,7 @@ export class Service {
 
   async getPost(slug) {
     try {
-      await this.databases.getDocumentDocument(
+      await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
@@ -81,7 +81,7 @@ export class Service {
   // u need a indexed value to add query
   async getPosts(queries = [Query.equal("statue","active")]){
     try {
-        await this.databases.getDocumentDocument(
+        await this.databases.getDocument(
           conf.appwriteDatabaseId,
           conf.appwriteCollectionId,
           queries
