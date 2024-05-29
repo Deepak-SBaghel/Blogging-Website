@@ -10,6 +10,8 @@ const authSlice = createSlice({
   reducers: {
     // if u want to take the value , u use action.payload.text/etc
     // if u want to update the state , u use state
+    
+    // while calling the function , I am passing userData , it is extracted by action.payload.userData
     login: (state, action) => {
       state.status = true;
       state.userData = action.payload.userData;

@@ -119,7 +119,7 @@ export class Service {
     }
   }
 
-  getFilePreview(fieldId){
+  getFilePreview(fieldId){ // return url , used in cards 
     return this.bucket.getFilePreview(
         conf.appwriteBucketId,
         fieldId
