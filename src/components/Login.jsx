@@ -11,6 +11,7 @@ function Login() {
   const dispatch = useDispatch();
   // handleSubmit , it is a method on useForm by reacthookform
   // use login method inside it
+  // REGESTER MEANS JUST TO TAKE INPUT
   const { regester, handleSubmit } = useForm();
   // above both are events / methods
   const [error, setError] = useState("");
