@@ -51,7 +51,7 @@ export class AuthService {
   }
   async getCurrentUser() {
     try {
-      return await this.account.get();
+      return await this.account.get(); // returns an obj , have $id in it 
     } catch (error) {
       // work when gives , an error
       console.log("AppWrite service :: getCurrentUser :: error", error);

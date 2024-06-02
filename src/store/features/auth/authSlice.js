@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   status: false, // usere is not authenticated initialy
-  userData: null, // if need information of user
+  userData: null, // userData.$id is the userId
 };
 const authSlice = createSlice({
   name: "auth",// this name is used in store 
