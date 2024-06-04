@@ -7,33 +7,35 @@ import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
 
 function Login() {
+  console.log("hellow2");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // handleSubmit , it is a method on useForm by reacthookform
   // use login method inside it
-  // REGESTER MEANS JUST TO TAKE INPUT
-  const { regester, handleSubmit } = useForm();
+  // REGiSTER MEANS JUST TO TAKE INPUT
+  const { register, handleSubmit } = useForm();
   // above both are events / methods
   const [error, setError] = useState("");
 
   const login = async (data) => {
     setError("");
+    console.log(data);
     // clean all the error while submitting
     try {
-      const session = authService.login(data);
+      const session = await authService.login(data);
       if (session) {
         // will use await bcs , it will extract grom the method getuseddata , backend
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(authLogin(userData));
         navigate("/");
-      } else {
       }
     } catch (error) {
       setError(error.message);
     }
   };
   return (
-    <div className="flex item-center justify-center w-full">
+    <div className="flex items-center justify-center w-full">
+      {console.log("inside login function")}
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
       >
@@ -55,7 +57,7 @@ function Login() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handleSubmit(login)} className="mt-5">
+        <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
             <Input
               label="Email:"
@@ -65,22 +67,22 @@ function Login() {
               // this email ⬇️ is  unique ( it is a key)
               // and also pass the options with is like req , val . read from doc(optional)
               // u have to spread , it is the syntax
-              {...regester("email", {
+              {...register("email", {
                 required: true,
-                validite: {
+                validate: {
                   matchPatern: (value) =>
                     // rege x , regular expression
                     // for verification
                     /^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/.test(value) ||
-                    "Email adress must be valid",
+                    "Email address must be valid",
                 },
               })}
             />
             <Input
-              label="Password"
+              label="Password: "
               type="password"
               placeholder="Enter your password"
-              {...regester("password", {
+              {...register("password", {
                 required: true,
               })}
             />

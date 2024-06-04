@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import appwrteService from "../../appwrite/config";
 import { Container, PostForm } from "../index";
 import { useNavigate, useParams } from "react-router-dom";
-function EditPost({ post }) {
+function EditPost() {
   const [post, setPost] = useState(null);
   const { slug } = useParams(); // geting value from the url
   const navigate = useNavigate();

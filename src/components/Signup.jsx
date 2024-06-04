@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import authServce from "../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../store/authSlice";
+import { login } from "../store/features/auth/authSlice";
 import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -12,13 +12,15 @@ function Signup() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   //  both are events / methods
-  const [regester, handleSubmit] = useForm();
+  const {register, handleSubmit} = useForm();
   const create = async (data) => {
     setError("");
     try {
       const userData = await authServce.createAccount(data);
       if (userData) {
+        console.log("account created");
         const userData = await authServce.getCurrentUser();
+        console.log("account created", userData);
         if (userData) dispatch(login(userData));
         navigate("/");
       }
@@ -55,8 +57,8 @@ function Signup() {
             <Input
               label="Full Name:"
               placeholder="Enter Your Full Name"
-              {...regester("name", {
-                reqired: true,
+              {...register("name", {
+                required: true,
               })}
             />
             <Input
@@ -67,9 +69,9 @@ function Signup() {
               // this email ⬇️ is  unique ( it is a key)
               // and also pass the options with is like req , val . read from doc(optional)
               // u have to spread , it is the syntax
-              {...regester("email", {
+              {...register("email", {
                 required: true,
-                validite: {
+                validate: {
                   matchPatern: (value) =>
                     // rege x , regular expression
                     // for verification
@@ -82,14 +84,14 @@ function Signup() {
               label="Password"
               type="password"
               placeholder="Enter Your Password"
-              {...regester("password", {
-                reqired: true,
+              {...register("password", {
+                required: true,
               })}
             />
             <Button
             type="submit"
             className="w-full"
-            />
+            /> Create Account 
             <Button/>
           </div>
         </form>

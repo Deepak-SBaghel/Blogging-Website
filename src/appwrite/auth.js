@@ -43,7 +43,8 @@ export class AuthService {
   }
   async login({ email, password }) {
     try {
-      await this.account.createEmailPasswordSession(email, password);
+      console.log("indide auth appwrite");
+      return await this.account.createEmailPasswordSession(email, password);
       //Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user.
     } catch (error) {
       throw error;
@@ -51,11 +52,14 @@ export class AuthService {
   }
   async getCurrentUser() {
     try {
-      return await this.account.get(); // returns an obj , have $id in it 
+      console.log("error in getcurrentuser");
+       return await this.account.get();
+      // returns an obj , have $id in it 
     } catch (error) {
       // work when gives , an error
       console.log("AppWrite service :: getCurrentUser :: error", error);
     }
+    console.log("no error in getcurrentuser");
     return null;
     // if there no account with this , it will return nnull
   }

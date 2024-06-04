@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import appwriteservice from "../../appwrite/config";
 import { Container, PostCard } from "../index";
 function Home() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     appwriteservice.getPosts().then((posts) => {
       if (posts) {
-        setPosts(posts);
+        setPosts(posts.documents);
       }
-    });
+    })
   }, []);
 
   if (posts.length === 0) {
@@ -18,7 +18,7 @@ function Home() {
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
               <h1 className="test-2xl font-bold hover:text-gray-500">
-                No Post written
+                Login to read posts
               </h1>
             </div>
           </div>

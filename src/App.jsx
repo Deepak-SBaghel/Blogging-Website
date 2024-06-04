@@ -4,6 +4,7 @@ import "./App.css";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/features/auth/authSlice";
 import {Header,Footer} from "./components/index"
+import { Outlet } from 'react-router-dom'
 
 function App() {
   // loading
@@ -15,6 +16,7 @@ function App() {
       .getCurrentUser()
       .then((userData) => {
         if (userData) {
+          console.log(userData);
           dispatch(login({ userData }));
         } else {
           dispatch(
@@ -31,7 +33,7 @@ function App() {
       <div className="w-full block">
         <Header/>
         <main>
-          {/* <Outlet/> */}
+          TODO: <Outlet/>
         </main>
         <Footer/>
       </div>

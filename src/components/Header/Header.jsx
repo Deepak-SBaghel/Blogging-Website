@@ -55,7 +55,6 @@ function Header() {
             {navItems.map((item) =>
               item.active ? (
                 // only on the html items which are repeating we have to add keys
-
                 // A “key” is a special string attribute you need to include when creating lists of elements in React. Keys are used in React to identify which items in the list are changed, updated, or deleted.
 
                 // Keys are used to give an identity to the elements in the lists. It is recommended to use a string as a key that uniquely identifies the items in the list.
@@ -64,7 +63,9 @@ function Header() {
                   {/* navigate uses  a link  
                       gives the url to on lcick*/}
                   <button
-                    onClick={() => navigate(item.slug)}
+                    onClick={() => { 
+                      console.log("hellow2");
+                      navigate(item.slug)}}
                     className="inline-block px-6 py-2 duration-200 hover:br-blue-100 roubded-full"
                   >
                     {item.name}

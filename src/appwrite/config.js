@@ -51,7 +51,7 @@ export class Service {
     }
   }
 
-  async daletePost(slug) {
+  async deletePost(slug) {
     try {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
@@ -67,26 +67,26 @@ export class Service {
 
   async getPost(slug) {
     try {
-      await this.databases.getDocument(
+      return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
       );
-      return true;
+     
     } catch (error) {
       console.log("AppWrite service :: getPost :: error", error);
       return false;
     }
   }
   // u need a indexed value to add query
-  async getPosts(queries = [Query.equal("statue","active")]){
+  async getPosts(queries = [Query.equal("status","active")]){
     try {
-        await this.databases.getDocument(
+        return await this.databases.listDocuments(
           conf.appwriteDatabaseId,
           conf.appwriteCollectionId,
           queries
         );
-        return true;
+        
       } catch (error) {
         console.log("AppWrite service :: getPosts :: error", error);
         return false;
@@ -128,7 +128,7 @@ export class Service {
 }
 
 const service = new Service();
-export default Service;
+export default service;
 
 
 
