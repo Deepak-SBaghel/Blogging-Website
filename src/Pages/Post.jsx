@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Container } from "../index";
+import { Button, Container } from "../components/index";
 import { useSelector } from "react-redux";
-import appwriteService from "../../appwrite/config";
+import appwriteService from "../appwrite/config";
 import parse from "html-react-parser";
 
 // page for reading the post

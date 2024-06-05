@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import appwrteService from "../../appwrite/config";
-import { Container, PostForm } from "../index";
+import appwriteService from "../appwrite/config";
+import { Container, PostForm } from "../components/index";
 import { useNavigate, useParams } from "react-router-dom";
 function EditPost() {
   const [post, setPost] = useState(null);
@@ -9,7 +9,7 @@ function EditPost() {
 
   useEffect(() => {
     if (slug) {
-      appwrteService.getPost(slug).then((post) => {
+      appwriteService.getPost(slug).then((post) => {
         if (post) {
           setPost(post);
         }

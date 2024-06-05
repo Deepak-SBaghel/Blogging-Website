@@ -52,7 +52,7 @@ export class AuthService {
   }
   async getCurrentUser() {
     try {
-      console.log("error in getcurrentuser");
+      console.log("error in getcurrentuser", await this.account.get());
        return await this.account.get();
       // returns an obj , have $id in it 
     } catch (error) {
