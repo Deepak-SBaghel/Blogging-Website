@@ -15,18 +15,19 @@ function PostForm({ post }) {
       defaultValues: {
         title: post?.title || "",
         slug: post?.$id || "",
+        content: post?.content || "",
         status: post?.status || "active",
       },
     });
 
   const navigate = useNavigate();
   // we extract userdata with help of useSelector react-router-dom
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
-        ? appwriteService.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
@@ -47,7 +48,7 @@ function PostForm({ post }) {
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
-          userID: userData.$id,
+          userId: userData.$id,
         });
         //redirect user
         if (dbPost) {
@@ -85,10 +86,8 @@ function PostForm({ post }) {
     });
 
     // Cleanup function to unsubscribe from watching form field changes
-    return () => {
-      subscription.unsubscribe();
+    return () => subscription.unsubscribe();
       // Helps in memory management by removing the subscription
-    };
   }, [watch, slugTransform, setValue]);
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
@@ -111,8 +110,7 @@ function PostForm({ post }) {
           }}
         />
         <RTE
-         {...console.log(getValues("content"))}
-          label="Context :"
+          label="Content :"
           name="content"
           control={control} // we are getting all the control here i.e values here
           defaultValue={getValues("content")}
@@ -123,27 +121,27 @@ function PostForm({ post }) {
           label="Featured Image :"
           type="file"
           className="mb-4"
-          accept="image/png,image/jpg, inage/jpeg, inage/gif"
+          accept="image/png,image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
         {post && (
-          <div className="w-full mb--4">
+          <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilepreview(post.featuredImage)}
+              src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
           </div>
         )}
         <Select
-          options={["active", "Inactive"]}
-          label="status"
+          options={["active", "inactive"]}
+          label="Status"
           className="mb-4"
           {...register("status", { required: true })}
         />
         <Button
           type="submit"
-          bgColour={post ? "bg-green-500" : undefined}
+          bgColor={post ? "bg-green-500" : undefined}
           className="w-full"
         >
           {post ? "Update" : "Submit"}

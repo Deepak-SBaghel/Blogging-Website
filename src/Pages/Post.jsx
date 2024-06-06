@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../components/index";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import parse from "html-react-parser";
 // page for reading the post
 export default function Post() {
   const [post, setPost] = useState(null);
-  const { slug } = useParams();
+  const { slug } = useParams();// extract from url
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.auth.userData);
@@ -21,12 +21,13 @@ export default function Post() {
         else navigate("/");
       });
     }
+    else navigate("/");
   }, [slug, navigate]);
 
   const deletePost = () => {
     appwriteService.deletePost(post.$id).then((status) => {
       if (status) {
-        appwriteService.deleteFile(post.fearuredImage);
+        appwriteService.deleteFile(post.featuredImage);
         navigate("/");
       }
     });
@@ -36,18 +37,18 @@ export default function Post() {
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
-            src={appwriteService.getFilePreview(post.fearuredImage)}
-            alt="post.title"
+            src={appwriteService.getFilePreview(post.featuredImage)}
+            alt={"post.title"}
             className="rounded-xl"
           />
           {isAuth && (
             <div className="absolute right-6 top-6">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColour="bg-green-500" className="mr-3">
+                <Button bgColor="bg-green-500" className="mr-3">
                   Edit
                 </Button>
               </Link>
-              <Button bgColour="bg-red-500" onClick={deletePost}>
+              <Button bgColor="bg-red-500" onClick={deletePost}>
                 Delete
               </Button>
             </div>

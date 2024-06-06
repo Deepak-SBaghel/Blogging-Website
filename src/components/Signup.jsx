@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import authServce from "../appwrite/auth";
+import authService from "../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../store/features/auth/authSlice";
 import { Button, Input, Logo } from "./index";
@@ -16,10 +16,10 @@ function Signup() {
   const create = async (data) => {
     setError("");
     try {
-      const userData = await authServce.createAccount(data);
+      const userData = await authService.createAccount(data);
       if (userData) {
         console.log("account created");
-        const userData = await authServce.getCurrentUser();
+        const userData = await authService.getCurrentUser();
         console.log("account created", userData);
         if (userData) dispatch(login(userData));
         navigate("/");
@@ -91,8 +91,8 @@ function Signup() {
             <Button
             type="submit"
             className="w-full"
-            /> Create Account 
-            <Button/>
+            > Create Account 
+            </Button>
           </div>
         </form>
       </div>

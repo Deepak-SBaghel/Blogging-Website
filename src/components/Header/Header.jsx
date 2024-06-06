@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 // used to extract values from the store
 import { useNavigate } from "react-router-dom";
 function Header() {
-  const authStatus = useSelector((state) => {
-    state.auth.status;
-  });
+  const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
 
   // this is nnavigation bar
@@ -42,7 +40,7 @@ function Header() {
     },
   ];
   return (
-    <header className="py-3 shadow bg-gra-500">
+    <header className="py-3 shadow bg-gray-500">
       <Container>
         <nav className="flex">
           <div className="mr-4">
@@ -63,10 +61,8 @@ function Header() {
                   {/* navigate uses  a link  
                       gives the url to on lcick*/}
                   <button
-                    onClick={() => { 
-                      console.log("hellow2");
-                      navigate(item.slug)}}
-                    className="inline-block px-6 py-2 duration-200 hover:br-blue-100 roubded-full"
+                    onClick={() => navigate(item.slug)}
+                    className="inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
                   >
                     {item.name}
                   </button>

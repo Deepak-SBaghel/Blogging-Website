@@ -1,8 +1,8 @@
 // select btn for dropdown btn for active and not active 
-import React, { userId } from "react";
+import React, { useId } from "react";
 
-function Select({ options, label, className = "", ...props }, ref) {
-  const id = userId();
+function Select({ options, label, className, ...props }, ref) {
+  const id = useId();
   return (
     <div className="w-full">
       {label && <label htmlFor={id} className=""></label>}

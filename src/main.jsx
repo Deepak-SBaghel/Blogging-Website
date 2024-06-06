@@ -14,7 +14,7 @@ import {
   Post,
   Login,
   Signup,
-} from "../src/components/Pages/index.js";
+} from "../src/Pages/index.js";
 
 const router = createBrowserRouter([
   {

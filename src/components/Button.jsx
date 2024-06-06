@@ -4,14 +4,14 @@ function Button({
   // this is the text which should be shown
   children,
   type = "button",
-  bgColour = "bg-blue-600",
+  bgColor = "bg-blue-600",
   textColour = "text-white",
   className = "",
   ...props
 }) {
   return (
     <button
-      className={`px-4 py-2 rounded-lg ${className} ${bgColour} ${textColour}`}
+      className={`px-4 py-2 rounded-lg ${className} ${bgColor} ${textColour}`}
       {...props }
     >
       {children}
