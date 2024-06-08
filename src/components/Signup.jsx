@@ -32,7 +32,7 @@ function Signup() {
   return (
     <div className="flex items-center justify-center">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg  rounded-xl p-10  bg-conf1 border-solid border-2 border-conf4 `}
       >
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
@@ -57,6 +57,7 @@ function Signup() {
             <Input
               label="Full Name:"
               placeholder="Enter Your Full Name"
+              className="border-solid border-2 border-conf4"
               {...register("name", {
                 required: true,
               })}
@@ -65,6 +66,7 @@ function Signup() {
               label="Email:"
               placeholder="Enter Your email"
               type="email"
+              className="border-solid border-2 border-conf4"
               // this is  specfically for the useForm
               // this email ⬇️ is  unique ( it is a key)
               // and also pass the options with is like req , val . read from doc(optional)
@@ -84,6 +86,7 @@ function Signup() {
               label="Password"
               type="password"
               placeholder="Enter Your Password"
+              className="border-solid border-2 border-conf4"
               {...register("password", {
                 required: true,
               })}

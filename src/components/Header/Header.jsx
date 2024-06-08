@@ -40,13 +40,13 @@ function Header() {
     },
   ];
   return (
-    <header className="py-3 shadow bg-gray-500">
+    <header className="sticky py-3 shadow bg-conf2 text-black">
       <Container>
         <nav className="flex">
           <div className="mr-4">
             {/* use to prop to add logo */}
             <Link to="/">
-              <Logo width="70px" />
+              <Logo width="50px" />
             </Link>
           </div>
           <ul className="flex ml-auto">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import appwriteservice from "../appwrite/config";
 import { Container, PostCard } from "../components/index";
+import { useSelector } from "react-redux";
 function Home() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -8,8 +9,11 @@ function Home() {
       if (posts) {
         setPosts(posts.documents);
       }
-    })
+    });
   }, []);
+  const userData = useSelector((state) => state.auth.userData);
+  const isAuthor = (post) =>
+    post && userData ? post.userId === userData.$id : false;
 
   if (posts.length === 0) {
     return (
@@ -17,9 +21,15 @@ function Home() {
         <Container>
           <div className="flex flex-wrap">
             <div className="p-2 w-full">
-              <h1 className="text-2xl font-bold hover:text-gray-500">
-                Login to read posts
-              </h1>
+              {userData ? (
+                <h1 className="text-2xl font-bold hover:text-gray-500">
+                  Empty : No Article Published
+                </h1>
+              ) : (
+                <h1 className="text-2xl font-bold hover:text-gray-500">
+                  Login to read posts
+                </h1>
+              )}
             </div>
           </div>
         </Container>
@@ -29,13 +39,15 @@ function Home() {
   return (
     <div className="w-full py-8">
       <Container>
+        <h1 className="text-2xl font-bold pb-3">Your Posts</h1>
         <div className="flex flex-wrap">
-          {posts.map((post) => (
-            <div key={post.$id} className="p-2 w-1/4">
-              {/* <PostCard post={post} /> */}
-              <PostCard {...post} />
-            </div>
-          ))}
+          {posts.map((post) =>
+            isAuthor(post) ? (
+              <div key={post.$id} className="p-2 w-1/4">
+                <PostCard {...post} />
+              </div>
+            ) : null
+          )}
         </div>
       </Container>
     </div>

@@ -7,13 +7,13 @@ function PostCard({ $id, title, featuredImage }) {
     // with link the whole card is clickable
     // to takes the url of the card
     <Link to={`/post/${$id}`}>
-      <div className="w-full  bg-gray-100 rounded-xl p-4">
+      <div className="w-full bg-conf1 rounded-xl p-4 border-solid  border-2 border-conf4 hover:border-dashed">
         <div className="w-full justify-center mb-4">
           {/* here the id of the image is featured image */}
           <img
             src={appwriteService.getFilePreview(featuredImage)}
             alt={title}
-            className="rounded-xl"
+            className="rounded-xl "
           />
         </div>
         <h2 className="text-xl font-bold">{title}</h2>

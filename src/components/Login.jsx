@@ -37,7 +37,7 @@ function Login() {
     <div className="flex items-center justify-center w-full">
       {console.log("inside login function")}
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 bg-conf1 border-solid border-2 border-conf4`}
       >
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
@@ -63,6 +63,7 @@ function Login() {
               label="Email:"
               placeholder="Enter Your email"
               type="email"
+              className="border-solid border-2 border-conf4"
               // this is  specfically for the useForm
               // this email ⬇️ is  unique ( it is a key)
               // and also pass the options with is like req , val . read from doc(optional)
@@ -82,6 +83,7 @@ function Login() {
               label="Password: "
               type="password"
               placeholder="Enter your password"
+              className="border-solid border-2 border-conf4"
               {...register("password", {
                 required: true,
               })}

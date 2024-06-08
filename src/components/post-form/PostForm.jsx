@@ -71,7 +71,7 @@ function PostForm({ post }) {
     return "";
   }, []);
 
-  // update slug value when the title changes  
+  // update slug value when the title changes
   useEffect(() => {
     // Subscribing to changes in form fields
     const subscription = watch((value, { name }) => {
@@ -87,21 +87,24 @@ function PostForm({ post }) {
 
     // Cleanup function to unsubscribe from watching form field changes
     return () => subscription.unsubscribe();
-      // Helps in memory management by removing the subscription
+    // Helps in memory management by removing the subscription
   }, [watch, slugTransform, setValue]);
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-wrap bg-conf1 py-2 border-solid rounded-xl border-2 border-conf4"
+    >
       <div className="w-2/3 px-2">
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="mb-4 border-solid rounded-xl border-2 border-conf4"
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          className="mb-4 border-solid rounded-xl border-2 border-conf4"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -114,13 +117,14 @@ function PostForm({ post }) {
           name="content"
           control={control} // we are getting all the control here i.e values here
           defaultValue={getValues("content")}
+          className="border-solid rounded-xl border-2 border-conf4"
         />
       </div>
       <div className="w-1/3 px-2">
         <Input
           label="Featured Image :"
-          type="file"
-          className="mb-4"
+          type="file"// imp
+          className="mb-4 border-solid rounded-xl border-2 border-conf4"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
@@ -129,14 +133,14 @@ function PostForm({ post }) {
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
-              className="rounded-lg"
+              className="rounded-lg "
             />
           </div>
         )}
         <Select
           options={["active", "inactive"]}
           label="Status"
-          className="mb-4"
+          className="mb-4 border-solid rounded-xl border-2 border-conf4"
           {...register("status", { required: true })}
         />
         <Button
