@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../components/index";
 import { useSelector } from "react-redux";
@@ -8,11 +8,11 @@ import parse from "html-react-parser";
 // page for reading the post
 export default function Post() {
   const [post, setPost] = useState(null);
-  const { slug } = useParams();// extract from url
+  const { slug } = useParams(); // extract from url
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.auth.userData);
-  const isAuth = post && userData ? post.userId === userData.$id : false;
+  const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   useEffect(() => {
     if (slug) {
@@ -20,8 +20,7 @@ export default function Post() {
         if (post) setPost(post);
         else navigate("/");
       });
-    }
-    else navigate("/");
+    } else navigate("/");
   }, [slug, navigate]);
 
   const deletePost = () => {
@@ -38,10 +37,10 @@ export default function Post() {
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
             src={appwriteService.getFilePreview(post.featuredImage)}
-            alt={"post.title"}
+            alt={post.title}
             className="rounded-xl"
           />
-          {isAuth && (
+          {isAuthor && (
             <div className="absolute right-6 top-6">
               <Link to={`/edit-post/${post.$id}`}>
                 <Button bgColor="bg-green-500" className="mr-3">
@@ -58,7 +57,8 @@ export default function Post() {
           <h1 className="text-2xl font-bold">{post.title}</h1>
         </div>
         <div className="browser-css">
-          {parse(post.content)}{/*parse will convert html text to text*/}
+          {parse(post.content)}
+          {/*parse will convert html text to text*/}
         </div>
       </Container>
     </div>
