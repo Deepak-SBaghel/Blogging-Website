@@ -1,1 +1,0 @@
-appwrite index is used for adding filtering and sorting 
